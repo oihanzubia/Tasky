@@ -1,0 +1,33 @@
+﻿@page "/tasker"
+
+<h3>Tasker</h3>
+
+<p class="display-4">Ataza konfigurazioa</p>
+<div class="dropdown-divider"></div>
+<div class="input-group" style="width:500px">
+    <input class="form-control" type="text" placeholder="Atazak egiteke" @bind=taskName />
+    <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button" @onclick=AddTask>Ataza gehitu</button>
+    </div>
+</div>
+
+<p class="display-4 mt-4">Atazak egiteke</p>
+<ul class="list-group">
+    @foreach(var task in Tasks)
+    {
+        <TaskComponent TaskModel=@task />
+    }
+</ul>
+
+@code {
+    string taskName = "";
+    List<TaskModel> Tasks = new List<TaskModel>();
+    void AddTask()
+    {
+        if (!string.IsNullOrEmpty(taskName))
+        {
+            Tasks.Add(new TaskModel { TaskName = taskName });
+            taskName = "";
+        }
+    }
+}

@@ -1,0 +1,19 @@
+﻿<div class="form-check">
+
+    @if (TaskModel.IsCompleted)
+    {
+        <input class="form-check-input" type="checkbox" id="@TaskModel.Id" disabled checked />
+    }
+    else
+    {
+        <input class="form-check-input" type="checkbox" id="@TaskModel.Id" @bind=TaskModel.IsCompleted />
+    }
+    <label class="form-check-label" for="@TaskModel.Id">
+        @TaskModel.TaskName
+    </label>
+</div>
+
+@code {
+    [Parameter]
+    public TaskModel TaskModel { get; set; } = new TaskModel();
+}
